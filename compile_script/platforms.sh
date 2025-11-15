@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source_code_platforms=(openwrt immortalwrt lede)
+source_code_platforms=(lede) # <--- 修改点 1
 
-
+# 下面的 openwrt_value 和 immortalwrt_value 定义可以不用动
 
 openwrt_value='{"REPO_URL": "https://github.com/openwrt/openwrt.git","REPO_BRANCH": "openwrt-24.10","CONFIGS": "config/openwrt_config","DIY_P1_SH": "diy_script/openwrt_diy/diy-part1.sh","DIY_P2_SH": "diy_script/openwrt_diy/diy-part2.sh","DIY_P3_SH": "diy_script/openwrt_diy/diy-part3.sh","OS": "ubuntu-latest"}'
 
@@ -11,21 +11,23 @@ immortalwrt_value='{"REPO_URL": "https://github.com/immortalwrt/immortalwrt.git"
 lede_value='{"REPO_URL": "https://github.com/coolsnowwolf/lede","REPO_BRANCH": "master","CONFIGS": "config/leanlede_config","DIY_P1_SH": "diy_script/lean_diy/diy-part1.sh","DIY_P2_SH": "diy_script/lean_diy/diy-part2.sh","DIY_P3_SH": "diy_script/lean_diy/diy-part3.sh","OS": "ubuntu-latest"}'
 
 
+# openwrt_platforms 和 immortalwrt_platforms 也可以不用动，因为循环已经不会读取它们了
 openwrt_platforms=(X86 R2S R3S R4S R4SE R5C R5S R6C R6S)
 
 immortalwrt_platforms=(X86 R2S R3S R4S R4SE R5C R5S R6C R6S R66S R68S)
 
-lede_platforms=(X86 R2S R3S R4S R4SE R5C R5S R6C R6S H28K H29K H66K H68K H69K R66S R68S)
+lede_platforms=(X86) # <--- 修改点 2
 
 
 copy_backgroundfiles_platforms=(X86 R5S R5C R4S R4SE R2S R2C H66K H68K H69K R66S R68S R_PI_3b R_PI_4b)
+
+# --- 以下的代码完全不需要修改 ---
 
 matrix_json="["
 source_matrix_json="["
 
 for source_platform in "${source_code_platforms[@]}"; do
     
-
     platforms_var="${source_platform}_platforms[@]"
     platforms=("${!platforms_var}")
     value_var="${source_platform}_value"
