@@ -46,6 +46,16 @@ fi
 mkdir -p dl
 cp -r $PATCHES_SRC_DIR/library/* ./dl/
 
+# install iStore
+./scripts/feeds update istore
+./scripts/feeds install -d y -p istore luci-app-store
+
+# move OpenList to NAS menu
+OPENLIST_MENU_FILE="feeds/istore/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json"
+if [ -f "$OPENLIST_MENU_FILE" ]; then
+    sed -i 's|admin/services/openlist|admin/nas/openlist|g' "$OPENLIST_MENU_FILE"
+fi
+
 # --- Modify SSH Configuration (Dropbear -> 2222, OpenSSH -> 22) ---
 
 # 1. 确保 files 目录存在 (在 OpenWrt 源码根目录下)
