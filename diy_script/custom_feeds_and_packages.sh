@@ -7,6 +7,7 @@ export repos=(
   "src-git helloworld https://github.com/fw876/helloworld;master"
   "src-git OpenClash https://github.com/vernesong/OpenClash;master"
   "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main"
+  "src-git istore https://github.com/linkease/istore;main"
 )
 
 
