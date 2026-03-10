@@ -1,1 +1,36 @@
+# 定义网卡 0 (LAN)
+config device
+    option name 'eth0'
+    option macaddr '00:e0:46:a1:b4:ec'
 
+# 定义网卡 1 (WAN)
+config device
+    option name 'eth1'
+    option macaddr '00:e0:46:a1:b4:ed'
+
+# 【新增：定义桥接设备，确保 LAN 口正常工作】
+config device
+    option name 'br-lan'
+    option type 'bridge'
+    list ports 'eth0'
+
+config globals 'globals'
+    option ula_prefix 'fd00:db80:0:1::/64'
+
+config interface 'lan'
+    option device 'br-lan'
+    option proto 'static'
+    option ipaddr '192.168.99.1'
+    option netmask '255.255.255.0'
+    option ip6assign '60'
+
+config interface 'wan'
+    option device 'eth1'
+    option proto 'pppoe'
+    option username '1'
+    option password '1'
+    option ipv6 'auto'
+
+config interface 'wan6'
+    option device 'eth1'
+    option proto 'dhcpv6'
