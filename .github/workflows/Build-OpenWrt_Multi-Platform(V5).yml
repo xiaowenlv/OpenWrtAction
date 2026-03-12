@@ -980,11 +980,11 @@ jobs:
     needs: [rerun-failed-jobs, job_organize_tags]
     if: ${{ always() }}
     steps:
-      - name: Trigger build
-        if: ${{ needs.rerun-failed-jobs.result == 'skipped' }}
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.MY_SECRET_PAT }}
-          repository: smallprogram/MyAction
-          event-type: openwrt_compilation_completed
+      # - name: Trigger build
+      #   if: ${{ needs.rerun-failed-jobs.result == 'skipped' }}
+      #   uses: peter-evans/repository-dispatch@v3
+      #   with:
+      #     token: ${{ secrets.MY_SECRET_PAT }}
+      #     repository: smallprogram/MyAction
+      #     event-type: openwrt_compilation_completed
       
