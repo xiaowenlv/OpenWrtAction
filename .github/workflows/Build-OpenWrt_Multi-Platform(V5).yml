@@ -126,6 +126,8 @@ jobs:
       - name: Merge and push changes with "theirs" strategy
         run: |
           git checkout temp-${{ matrix.source_code_platform }}
+          git restore --staged .github/workflows/ 2>/dev/null || true
+          git checkout -- .github/workflows/ 2>/dev/null || true
           git add .
 
           if ! git diff --cached --quiet; then
